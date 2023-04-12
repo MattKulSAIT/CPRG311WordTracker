@@ -16,8 +16,25 @@ public class BSTree implements BSTreeADT, Serializable{
 	//We need some stuff for serializable to work I think 
 	//Also not sure if we need to do seriablizable for the nodes
 	//Attribuest I think we need
-	private int size = 0;
-	private BSTreeNode rootNode = null;
+	private int size;
+	private BSTreeNode rootNode;
+	
+	/**
+	 * Construtor for a Binary search tree object 
+	 */
+	public BSTree() {
+		this.rootNode = null;
+		this.size = 0;
+	}
+	
+	/**
+	 * Constructor for a Binary Search Tree with the root node object
+	 * @param newEntry the value to be stored in the node at the root of the tree
+	 */
+	public BSTree(Comparable newEntry) {
+		this.rootNode = new BSTreeNode(newEntry);
+		this.size = 1;
+	}
 	
 	/**
 	 * Method to get the root node for the Binary Tree
