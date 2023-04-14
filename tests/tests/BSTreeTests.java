@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import exceptions.TreeException;
 import referenceBasedTreeImplementation.BSTree;
+import referenceBasedTreeImplementation.BSTreeNode;
 
 
 
@@ -56,7 +57,7 @@ public class BSTreeTests {
 		assertEquals(0, testBST.getHeight());
 		
 		//TODO finish this method 
-		
+		fail();
 	}
 	
 	@Test
@@ -97,57 +98,76 @@ public class BSTreeTests {
 		
 	}
 	
+	@Test
 	public void testContains() {
 		testBST = new BSTree();
 		
 		//TODO DO this method 
-
+		fail();
 	}
 	
+	@Test
 	public void testSearch() {
 		testBST = new BSTree();
 		
 		//TODO DO this method 
-
+		fail();
 	}
 	
+	@Test
 	public void testAdd() throws TreeException {
 		testBST = new BSTree();
 		
 		//TODO DO this method 
 		//add 1 thing
-		
+		testBST.add("S");
 		
 		assertEquals(1, testBST.size());
-		//assertEquals(WhaterYouAdded, testBST.getRoot());
+		assertEquals("S", testBST.getRoot().getHolding());
 		
-		//add 3 more stuff root should still be the same
+		testBST.add("V");
+		testBST.add("Q");
+		testBST.add("A");
 		assertEquals(4, testBST.size());
-		//assertEquals(WhaterYouAdded, testBST.getRoot());
+		assertEquals("S", testBST.getRoot().getHolding());
 		
+		//Testing to make sure duplicates dont get added 
+		testBST.add("S");
+		assertEquals(4, testBST.size());
+		
+		//Testing to make sure Nodes go in the right spot
+		BSTreeNode root = testBST.getRoot();
+		assertEquals("V", root.getRightSubNode().getHolding());
+		assertEquals("Q", root.getLeftSubNode().getHolding());
+		
+		BSTreeNode subNodes = root.getLeftSubNode();
+		assertEquals("A", subNodes.getLeftSubNode().getHolding());
 		//Check for height, Im not sure what the hight will be as it depends on what we add
 
 	}
 	
+	@Test
 	public void testInorderIterator() {
 		testBST = new BSTree();
-		
+		fail();
 		//TODO DO this method 
 		//Add like 5 or 6 things then call this method
 		//Check to make sure it followed LVR traversal 
 	}
-	
+
+	@Test
 	public void testPreorderIterator() {
 		testBST = new BSTree();
-		
+		fail();
 		//TODO DO this method 
 		//Add like 5 or 6 things then call this method
 		//Check to make sure it followed VLR traversal 
 	}
 	
+	@Test
 	public void testPostorderIterator() {
 		testBST = new BSTree();
-		
+		fail();
 		//TODO DO this method 
 		//Add like 5 or 6 things then call this method
 		//Check to make sure it followed LRV traversal 

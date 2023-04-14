@@ -67,5 +67,14 @@ public class BSTreeNode <E> {
 	public void setRightSubNode(BSTreeNode rightSubNode) {
 		this.rightSubNode = rightSubNode;
 	}
+	
+	/**
+	 * This method will be used to compare nodes using the compareTo() method 
+	 * @param nodeToAdd the new node 
+	 * @return Number < 0 if this.holding is smaller; Number > 0 if this.holding is larger; 0 if the values are the same
+	 */
+	public int compareNode(BSTreeNode nodeToAdd) {
+		return this.holding.compareTo(nodeToAdd.getHolding());
+	}
 
 }

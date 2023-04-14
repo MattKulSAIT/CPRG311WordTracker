@@ -44,12 +44,17 @@ public class BSTree implements BSTreeADT, Serializable{
 	 */
 	@Override
 	public BSTreeNode getRoot() throws TreeException {
-		if(rootNode == null) {
-			new TreeException("This tree is Empty");
-			return null;
+		try {
+			if(rootNode == null) {
+				new TreeException("This tree is Empty");
+				return null;
+			}
+			else {
+				return rootNode;
+			}
 		}
-		else {
-			return rootNode;
+		catch(Exception e) {
+			return null;
 		}
 	}
 
@@ -145,6 +150,43 @@ public class BSTree implements BSTreeADT, Serializable{
 		}
 		else {
 			//This is for if its not the first node in the tree
+			BSTreeNode newNode = new BSTreeNode(newEntry);
+			BSTreeNode currentNode = this.rootNode;
+			boolean noHomeFound = true;
+			
+			while(noHomeFound) {
+				int i = currentNode.compareNode(newNode);
+				
+				//currentNode is larger; look at leftSubNode
+				if(i>0) {
+					if(currentNode.getLeftSubNode() == null) {
+						currentNode.setLeftSubNode(newNode);
+						newNode.setParentNode(currentNode);
+						size++;
+						return true;
+					}
+					else {
+						currentNode = currentNode.getLeftSubNode();
+					}
+				}
+				//Nodes are the same size should not be added 
+				else if(i==0) {
+					return false;
+				}
+				//currentNode is smaller; look at rightSubNode
+				else {
+					if(currentNode.getRightSubNode() == null) {
+						currentNode.setRightSubNode(newNode);
+						newNode.setParentNode(currentNode);
+						size++;
+						return true;
+					}
+					else {
+						currentNode = currentNode.getRightSubNode();
+					}
+				}
+			}
+			
 			return false;
 		}
 		
