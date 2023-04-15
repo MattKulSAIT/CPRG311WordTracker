@@ -119,11 +119,18 @@ public class BSTreeTests {
 	}
 	
 	@Test
-	public void testSearch() {
+	public void testSearch() throws TreeException {
 		testBST = new BSTree();
 		
-		//TODO DO this method 
-		fail();
+		testBST.add("V");
+		testBST.add("Q");
+		testBST.add("A");
+		
+		BSTreeNode nodeFound= testBST.search("Q");
+		assertEquals("Q", nodeFound.getHolding());
+		
+		//Test to make sure null is returned if object searching for is not there
+		assertEquals(null, testBST.search("P"));
 	}
 	
 	@Test

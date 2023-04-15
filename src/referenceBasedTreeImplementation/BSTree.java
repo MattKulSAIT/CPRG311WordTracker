@@ -124,6 +124,41 @@ public class BSTree implements BSTreeADT, Serializable{
 	@Override
 	public BSTreeNode search(Comparable entry) throws TreeException {
 		// TODO Auto-generated method stub
+		if(size == 0) {
+			throw new TreeException("This tree is Empty");
+		}
+		
+		BSTreeNode currentNode = this.rootNode;
+		BSTreeNode nodeLookingFor = new BSTreeNode(entry);
+		
+		boolean isItThere = true;
+		
+		while(isItThere) {
+			int i = currentNode.compareNode(nodeLookingFor);
+			
+			//currentNode is larger; look at leftSubNode
+			if(i>0) {
+				if(currentNode.getLeftSubNode() == null) {
+					return null;
+				}
+				else {
+					currentNode = currentNode.getLeftSubNode();
+				}
+			}
+			//Nodes are the same and should be returned
+			else if(i==0) {
+				return currentNode;
+			}
+			//currentNode is smaller; look at rightSubNode
+			else {
+				if(currentNode.getRightSubNode() == null) {
+					return null;
+				}
+				else {
+					currentNode = currentNode.getRightSubNode();
+				}
+			}
+		}
 		return null;
 	}
 
