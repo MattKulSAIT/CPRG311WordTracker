@@ -61,9 +61,16 @@ public class BSTreeTests {
 		testBST = new BSTree();
 		
 		assertEquals(0, testBST.getHeight());
+
+		testBST.add("A");
+		assertEquals(1, testBST.getHeight());
 		
-		//TODO finish this method 
-		fail();
+		testBST.add("B");
+		testBST.add("C");
+		testBST.add("F");
+		assertEquals(4, testBST.getHeight());
+		
+		//Maybe add a few more test to this maybe
 	}
 	
 	@Test
@@ -93,10 +100,6 @@ public class BSTreeTests {
 	@Test
 	public void testClear() {
 		testBST = new BSTree();
-				
-		//TODO finish this method 
-		//add some stuff before tests
-		
 		
 		assertTrue(testBST.isEmpty());
 		assertEquals(0, testBST.size());
@@ -123,7 +126,6 @@ public class BSTreeTests {
 		assertTrue(testBST.contains("A"));
 		assertFalse(testBST.contains("Z"));
 		assertFalse(testBST.contains("B"));
-		//fail();
 	}
 	
 	@Test
@@ -175,7 +177,7 @@ public class BSTreeTests {
 		//Test adding Null
 		assertThrows(NullPointerException.class, () ->testBST.add(null));
 		
-		//Check for height, Im not sure what the hight will be as it depends on what we add
+		assertEquals(3, testBST.getHeight());
 
 	}
 	

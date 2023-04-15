@@ -1,5 +1,7 @@
 package referenceBasedTreeImplementation;
 
+import static org.junit.Assert.assertFalse;
+
 import java.io.Serializable;
 import java.util.NoSuchElementException;
 
@@ -62,8 +64,23 @@ public class BSTree implements BSTreeADT, Serializable{
 	@Override
 	public int getHeight() {
 		// TODO Auto-generated method stub
-		int height;
-		return 0;
+		return getHeightRecursive(rootNode);
+	}
+	
+	/**
+	 * Private method to recusively call the getHightMethod 
+	 * @param node the next node in the BST
+	 * @return 0 if the node is null and the recursion is over
+	 */
+	private int getHeightRecursive(BSTreeNode node) {
+		if(node == null) {
+			return 0;
+		}
+		else {
+			int leftHeight = getHeightRecursive(node.getLeftSubNode());
+			int rightHeight = getHeightRecursive(node.getRightSubNode());
+			return Math.max(leftHeight, rightHeight) + 1;
+		}
 	}
 
 	/**
