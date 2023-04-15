@@ -44,18 +44,14 @@ public class BSTree implements BSTreeADT, Serializable{
 	 */
 	@Override
 	public BSTreeNode getRoot() throws TreeException {
-		try {
 			if(rootNode == null) {
-				new TreeException("This tree is Empty");
-				return null;
+				throw new TreeException("This tree is Empty");
+				
 			}
 			else {
 				return rootNode;
 			}
-		}
-		catch(Exception e) {
-			return null;
-		}
+		
 	}
 
 	/**
@@ -102,7 +98,7 @@ public class BSTree implements BSTreeADT, Serializable{
 		rootNode.setHolding(null);
 		rootNode.setLeftSubNode(null);
 		rootNode.setRightSubNode(null);
-		
+		rootNode = null;
 	}
 
 	/**

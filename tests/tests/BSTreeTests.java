@@ -39,14 +39,20 @@ public class BSTreeTests {
 	
 	
 	@Test
-	public void testGetRoot() {
+	public void testGetRoot() throws TreeException {
 		testBST = new BSTree();
 		
 		assertThrows(TreeException.class, () ->testBST.getRoot());
 		
 		//TODO finish this method 
-		//add one node check again 
-		//add another one or two and chech again
+
+		testBST.add("V");
+		assertEquals("V", testBST.getRoot().getHolding());
+		
+		
+		testBST.add("Q");
+		testBST.add("A");
+		assertEquals("V", testBST.getRoot().getHolding());
 		
 	}
 
@@ -66,9 +72,11 @@ public class BSTreeTests {
 		
 		assertEquals(0, testBST.size());
 		
-		//TODO finish this method 
-		//add a new and check again
+		testBST.add("V");
+		testBST.add("Q");
+		testBST.add("A");
 		
+		assertEquals(3, testBST.size());		
 	}
 	
 	@Test
@@ -93,6 +101,12 @@ public class BSTreeTests {
 		
 		
 		assertTrue(testBST.isEmpty());
+		assertEquals(0, testBST.size());
+		testBST.add("V");
+		testBST.add("Q");
+		testBST.add("A");
+		assertEquals(3, testBST.size());
+		testBST.clear();
 		assertEquals(0, testBST.size());
 		assertThrows(TreeException.class, () ->testBST.getRoot());
 		
