@@ -84,10 +84,8 @@ public class BSTreeTests {
 		testBST = new BSTree();
 		
 		assertTrue(testBST.isEmpty());
-		
-		//TODO finish this method 
-		//Add somthing 
-		
+
+		testBST.add("A");
 		assertFalse(testBST.isEmpty());
 		
 	}
@@ -159,6 +157,7 @@ public class BSTreeTests {
 		
 		//Test adding Null
 		assertThrows(NullPointerException.class, () ->testBST.add(null));
+		
 		//Check for height, Im not sure what the hight will be as it depends on what we add
 
 	}
