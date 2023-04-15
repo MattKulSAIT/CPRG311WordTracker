@@ -156,6 +156,9 @@ public class BSTreeTests {
 		
 		BSTreeNode subNodes = root.getLeftSubNode();
 		assertEquals("A", subNodes.getLeftSubNode().getHolding());
+		
+		//Test adding Null
+		assertThrows(NullPointerException.class, () ->testBST.add(null));
 		//Check for height, Im not sure what the hight will be as it depends on what we add
 
 	}

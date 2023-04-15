@@ -137,7 +137,9 @@ public class BSTree implements BSTreeADT, Serializable{
 	@Override
 	public boolean add(Comparable newEntry) throws NullPointerException {
 		// TODO Auto-generated method stub
-		
+		if(newEntry == null) {
+			throw new NullPointerException();
+		}
 		if(size == 0) {
 			BSTreeNode newNode = new BSTreeNode(newEntry);
 			rootNode = newNode;
