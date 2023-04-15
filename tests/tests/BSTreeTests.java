@@ -111,16 +111,26 @@ public class BSTreeTests {
 	}
 	
 	@Test
-	public void testContains() {
+	public void testContains() throws TreeException {
 		testBST = new BSTree();
+		assertThrows(TreeException.class, () ->testBST.contains("P"));
 		
-		//TODO DO this method 
-		fail();
+		testBST.add("V");
+		testBST.add("Q");
+		testBST.add("A");
+		
+		assertTrue(testBST.contains("V"));
+		assertTrue(testBST.contains("A"));
+		assertFalse(testBST.contains("Z"));
+		assertFalse(testBST.contains("B"));
+		//fail();
 	}
 	
 	@Test
 	public void testSearch() throws TreeException {
 		testBST = new BSTree();
+		assertThrows(TreeException.class, () ->testBST.search("P"));
+		
 		
 		testBST.add("V");
 		testBST.add("Q");
