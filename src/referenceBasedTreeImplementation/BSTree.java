@@ -1,8 +1,9 @@
 package referenceBasedTreeImplementation;
 
-import static org.junit.Assert.assertFalse;
+//import static org.junit.Assert.assertFalse;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import exceptions.TreeException;
@@ -20,6 +21,7 @@ public class BSTree implements BSTreeADT, Serializable{
 	//Attribuest I think we need
 	private int size;
 	private BSTreeNode rootNode;
+	private ArrayList<BSTreeNode> theNodes;
 	
 	/**
 	 * Construtor for a Binary search tree object 
@@ -275,6 +277,15 @@ public class BSTree implements BSTreeADT, Serializable{
 		
 	}
 
+	
+	/**
+	 * Private method to add the current visit node to the arraylist 
+	 * @param currentNode whatever Node is currently being visited in the preorder method 
+	 */
+	private void visit(BSTreeNode currentNode) {
+		theNodes.add(currentNode);
+	}
+	
 	/**
 	 * A method to get an Iterator that follows the LVR traversal Pattern
 	 * 
@@ -282,10 +293,26 @@ public class BSTree implements BSTreeADT, Serializable{
 	 */
 	@Override
 	public Iterator inorderIterator() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		BSTreeNode root = rootNode;
+		theNodes = new ArrayList();
+		inorder(root);
+		
+		Iterator iterator = new Iterator();
+		theNodes = null;
+		return iterator;
 	}
 
+	/**
+	 * Private method to recusivly get the nodes for InorderIterator 
+	 * @param p
+	 */
+	private void inorder(BSTreeNode p) {
+		 if (p!=null) {
+			inorder(p.getLeftSubNode()); 	
+			visit(p); 				
+			inorder(p.getRightSubNode());} 	
+			}
 	/**
 	 * A method to get an Iterator that follows the VLR traversal Pattern
 	 * 
@@ -294,8 +321,28 @@ public class BSTree implements BSTreeADT, Serializable{
 	@Override
 	public Iterator preorderIterator() {
 		// TODO Auto-generated method stub
-		return null;
+		//ArrayList<BSTreeNode> theNodes = new ArrayList();
+		BSTreeNode root = rootNode;
+		theNodes = new ArrayList();
+		preorder(root);
+		
+		Iterator iterator = new Iterator();
+		theNodes = null;
+		return iterator;
 	}
+	
+	/**
+	 * Private method to recusivly get the nodes for PreOrderIterations 
+	 * @param p the root node then the childrent nodes
+	 */
+	private void preorder(BSTreeNode p) {
+		 if (p!=null) {
+			 visit(p);				
+			preorder(p.getLeftSubNode());		
+			preorder(p.getRightSubNode());}	
+			}
+
+	
 
 	/**
 	 * A method to get an Iterator that follows the LRV traversal Pattern
@@ -304,9 +351,26 @@ public class BSTree implements BSTreeADT, Serializable{
 	 */
 	@Override
 	public Iterator postorderIterator() {
-		// TODO Auto-generated method stub
-		return null;
+		BSTreeNode root = rootNode;
+		theNodes = new ArrayList();
+		postorder(root);
+		
+		
+		Iterator iterator = new Iterator();
+		theNodes = null;
+		return iterator;
 	}
+
+	/**
+	 * Private method to recusivly get the nodes for PostOrderIterations 
+	 * @param p the root node then the childrent nodes
+	 */
+	public void postorder(BSTreeNode p) {
+		 if (p!=null) {
+			postorder(p.getLeftSubNode()); 	
+			postorder(p.getRightSubNode()); 	
+			visit(p);} 		
+			}
 
 	/**
 	 * Class to make an Iterator object 
@@ -314,10 +378,15 @@ public class BSTree implements BSTreeADT, Serializable{
 	 * @author Matthew, Alex, Quintin, Miguel 
 	 *
 	 */
-	class Iterator implements utilities.Iterator{
+	public class Iterator implements utilities.Iterator{
 
-		Object[] theArray = new Object[size];
+		ArrayList<BSTreeNode> theArray = new ArrayList();
+		int cursor;
 		
+		public Iterator() {
+			theArray = theNodes;
+			cursor = -1;
+		}
 		/**
 		 * method to check if the iterator has a next value
 		 * 
@@ -325,8 +394,12 @@ public class BSTree implements BSTreeADT, Serializable{
 		 */
 		@Override
 		public boolean hasNext() {
-			// TODO Auto-generated method stub
-			return false;
+			if(this.cursor < size-1) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 
 		/**
@@ -336,9 +409,9 @@ public class BSTree implements BSTreeADT, Serializable{
 		 * @throws NoSuchElementException if there is no elements in the iterator
 		 */
 		@Override
-		public Object next() throws NoSuchElementException {
-			// TODO Auto-generated method stub
-			return null;
+		public BSTreeNode next() throws NoSuchElementException {
+			this.cursor++;
+			return theArray.get(cursor);
 		}		
 	}
 }

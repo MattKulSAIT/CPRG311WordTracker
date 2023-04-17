@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import exceptions.TreeException;
 import referenceBasedTreeImplementation.BSTree;
+import referenceBasedTreeImplementation.BSTree.Iterator;
 import referenceBasedTreeImplementation.BSTreeNode;
 
 
@@ -43,8 +44,6 @@ public class BSTreeTests {
 		testBST = new BSTree();
 		
 		assertThrows(TreeException.class, () ->testBST.getRoot());
-		
-		//TODO finish this method 
 
 		testBST.add("V");
 		assertEquals("V", testBST.getRoot().getHolding());
@@ -148,9 +147,7 @@ public class BSTreeTests {
 	@Test
 	public void testAdd() throws TreeException {
 		testBST = new BSTree();
-		
-		//TODO DO this method 
-		//add 1 thing
+
 		testBST.add("S");
 		
 		assertEquals(1, testBST.size());
@@ -184,28 +181,67 @@ public class BSTreeTests {
 	@Test
 	public void testInorderIterator() {
 		testBST = new BSTree();
-		fail();
+		
+		testBST.add("S");
+		testBST.add("V");
+		testBST.add("Q");
+		testBST.add("A");
+		
+		Iterator i = testBST.inorderIterator();
+		
+		assertTrue(i.hasNext());
+		assertEquals("A",i.next().getHolding());
+		assertEquals("Q",i.next().getHolding());
+		assertEquals("S",i.next().getHolding());
+		assertEquals("V",i.next().getHolding());
+		assertFalse(i.hasNext());
+		//fail();
 		//TODO DO this method 
-		//Add like 5 or 6 things then call this method
-		//Check to make sure it followed LVR traversal 
+		
 	}
 
 	@Test
 	public void testPreorderIterator() {
 		testBST = new BSTree();
-		fail();
+		//fail();
 		//TODO DO this method 
 		//Add like 5 or 6 things then call this method
 		//Check to make sure it followed VLR traversal 
+		
+		testBST.add("S");
+		testBST.add("V");
+		testBST.add("Q");
+		testBST.add("A");
+		
+		Iterator i = testBST.preorderIterator();
+		
+		assertTrue(i.hasNext());
+		assertEquals("S",i.next().getHolding());
+		assertEquals("Q",i.next().getHolding());
+		assertEquals("A",i.next().getHolding());
+		assertEquals("V",i.next().getHolding());
+		assertFalse(i.hasNext());
+		
 	}
 	
 	@Test
 	public void testPostorderIterator() {
 		testBST = new BSTree();
-		fail();
+		//fail();
 		//TODO DO this method 
-		//Add like 5 or 6 things then call this method
-		//Check to make sure it followed LRV traversal 
+		testBST.add("S");
+		testBST.add("V");
+		testBST.add("Q");
+		testBST.add("A");
+		
+		Iterator i = testBST.postorderIterator();
+		
+		assertTrue(i.hasNext());
+		assertEquals("A",i.next().getHolding());
+		assertEquals("Q",i.next().getHolding());
+		assertEquals("V",i.next().getHolding());
+		assertEquals("S",i.next().getHolding());
+		assertFalse(i.hasNext());
 
 	}
 }
