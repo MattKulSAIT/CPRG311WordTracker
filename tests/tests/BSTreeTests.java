@@ -203,10 +203,6 @@ public class BSTreeTests {
 	@Test
 	public void testPreorderIterator() {
 		testBST = new BSTree();
-		//fail();
-		//TODO DO this method 
-		//Add like 5 or 6 things then call this method
-		//Check to make sure it followed VLR traversal 
 		
 		testBST.add("S");
 		testBST.add("V");

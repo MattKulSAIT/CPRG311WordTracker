@@ -7,6 +7,7 @@ public class BSTreeNode <E> {
 	private BSTreeNode leftSubNode = null;
 	private BSTreeNode rightSubNode = null;
 	
+	
 	public BSTreeNode(Comparable holding) {
 		this.holding = holding;
 	}
