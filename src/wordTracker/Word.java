@@ -2,10 +2,10 @@ package wordTracker;
 
 import java.util.ArrayList;
 
-public class Word implements Comparable {
+public class Word implements Comparable<Word> {
 
 	private String word;
-	private ArrayList<Occurrence> whereItShowedUp;
+	private ArrayList<Occurrence> whereItShowedUp = new ArrayList();
 	
 	/**
 	 * Constructor to make a word Object 
@@ -29,15 +29,14 @@ public class Word implements Comparable {
 		whereItShowedUp.add(o);
 	}
 	
-	
+	@Override
 	public int compareTo(Word theWord) {
 		return this.word.compareTo(theWord.word);
 	}
-
-	@Override
-	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	public String getWord() {
+		return this.word;
 	}
-
 }
+
+
