@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,12 +34,18 @@ public class WordCounter {
 		//Alter the code is ignore if the thing = "" becuase its catching empty spaces
 		
 		Scanner scanner = null;
-		File file = null;
-		String fileName ="res/textfile.txt";
+		File file = new File(args[0]);;
+		String fileName =args[0];
 		BSTree BST = getExistingTree();
+		String printType = args[1];
+		boolean saveToOutputFile = false;
+		File outputFile = null;
+		if(args.length > 2) {
+			outputFile = new File(args[3]);
+			saveToOutputFile = true;
+		}
 		
 		try {
-			file = new File("res/textfile.txt");
 			scanner = new Scanner(file);
 			int lineNumber = 1;
 
@@ -49,20 +56,21 @@ public class WordCounter {
 				String [] listOfLine = aLine.split("[\\s\\p{Punct}]+");
 				
 				for(String word: listOfLine) {
-					
-					Word aWord = new Word(word,fileName,lineNumber);
-					
-					if(BST.size() < 1) {
-						BST.add(aWord);
-					}
-					else {
-						if(BST.contains(aWord)) {
-							BSTreeNode someNode = BST.search(aWord);
-							Word anotherOccurence = (Word) someNode.getHolding();
-							anotherOccurence.addInstance(fileName, lineNumber);
+					if(!word.equals("")) {
+						Word aWord = new Word(word,fileName,lineNumber);
+						
+						if(BST.size() < 1) {
+							BST.add(aWord);
 						}
 						else {
-							BST.add(aWord);
+							if(BST.contains(aWord)) {
+								BSTreeNode someNode = BST.search(aWord);
+								Word anotherOccurence = (Word) someNode.getHolding();
+								anotherOccurence.addInstance(fileName, lineNumber);
+							}
+							else {
+								BST.add(aWord);
+							}
 						}
 					}
 				}
@@ -77,10 +85,39 @@ public class WordCounter {
 			e.printStackTrace();
 		}
 		
-		//System.out.println("Stuff");
-		Iterator i = BST.inorderIterator();
-		pfPrint(i);
 		
+		Iterator i = BST.inorderIterator();
+		if(saveToOutputFile == false) {
+			if(printType.equals("-pf")) {
+				pfPrint(i);
+			}
+			else if(printType.equals("-pl")) {
+				plPrint(i);
+			}
+			else if(printType.equals("-po")) {
+				poPrint(i);
+			}
+			else {
+				System.out.println("Enter in (-pf) (-pl) (-po) for output");
+			}
+		}
+		//This is when the user wanted the printout to appear in the output file
+		else {
+			if(printType.equals("-pf")) {
+				pfOutputFile(i,outputFile);
+			}
+			else if(printType.equals("-pl")) {
+				plOutputFile(i,outputFile);
+			}
+			else if(printType.equals("-po")) {
+				poOutputFile(i,outputFile);
+			}
+			else {
+				System.out.println("Enter in (-pf) (-pl) (-po) for output");
+			}
+		}
+		
+		//Serializaion of the BSTree contents 
 		Iterator iToBeSerilaized = BST.preorderIterator();
 		serializeTree(iToBeSerilaized);
 	}
@@ -176,6 +213,99 @@ public class WordCounter {
 			}
 			System.out.print("This word showed up: "+showedUp.size());
 			System.out.println();
+		}
+	}
+	
+	
+	/**
+	 * Private method to print the list in alphabetical order with the files they came from s
+	 * This method outputs the on the file sepcified 
+	 * @param i an iterator of the binary tree in alphabetic order 
+	 */
+	private static void pfOutputFile(Iterator i, File f) {
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(f);
+
+			while(i.hasNext()){
+				Word currentWord = ((Word) i.next().getHolding());
+				String theLine = currentWord.getWord() + " --> ";
+				ArrayList<Occurrence> showedUp = currentWord.getWhereItShowedUp();
+				for(Occurrence occurence: showedUp) {
+					theLine = theLine+"("+occurence.getFileName() +") ";
+				}
+
+
+				writer.println(theLine);
+				writer.println();
+			}
+			writer.close();
+		}
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	/**
+	 * Private method to print the list in alphabetical order with the files they came from and the line numbers 
+	 * This method outputs the on the file sepcified 
+	 * @param i an iterator of the binary tree in alphabetic order 
+	 */
+	private static void plOutputFile(Iterator i, File f) {
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(f);
+
+			while(i.hasNext()){
+				Word currentWord = ((Word) i.next().getHolding());
+				String theLine = currentWord.getWord() + " --> ";
+				ArrayList<Occurrence> showedUp = currentWord.getWhereItShowedUp();
+				for(Occurrence occurence: showedUp) {
+					theLine = theLine+"("+occurence.getFileName() +" Line Number:"+occurence.getLineNumber()+") ";
+				}
+
+
+				writer.println(theLine);
+				writer.println();
+			}
+			writer.close();
+		}
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Private method to print the list in alphabetical order with the files they came from and the line numbers along
+	 * with the frequency of the words apprences 
+	 * This method outputs the on the file sepcified 
+	 * @param i an iterator of the binary tree in alphabetic order 
+	 */
+	private static void poOutputFile(Iterator i, File f) {
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(f);
+
+			while(i.hasNext()){
+				Word currentWord = ((Word) i.next().getHolding());
+				String theLine = currentWord.getWord() + " --> ";
+				ArrayList<Occurrence> showedUp = currentWord.getWhereItShowedUp();
+				for(Occurrence occurence: showedUp) {
+					theLine = theLine+"("+occurence.getFileName() +" Line Number:"+occurence.getLineNumber()+") ";
+				}
+				theLine = theLine +"This word showed up: "+showedUp.size();
+
+				writer.println(theLine);
+				writer.println();
+			}
+			writer.close();
+		}
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

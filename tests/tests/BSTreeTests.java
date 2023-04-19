@@ -14,7 +14,12 @@ import referenceBasedTreeImplementation.BSTree.Iterator;
 import referenceBasedTreeImplementation.BSTreeNode;
 
 
-
+/**
+ * This test class is used for testing the BSTree class
+ * 
+ * @author Alex, Matthew, Quintin, Miguel
+ *
+ */
 public class BSTreeTests {
 
 	private static BSTree testBST;
@@ -38,7 +43,9 @@ public class BSTreeTests {
 	}
 
 	
-	
+	/**
+	 * Test method for the getRoot method for the BSTree class
+	 */
 	@Test
 	public void testGetRoot() throws TreeException {
 		testBST = new BSTree();
@@ -55,6 +62,9 @@ public class BSTreeTests {
 		
 	}
 
+	/**
+	 * Test method for the getHeight method for the BSTree class
+	 */
 	@Test
 	public void testGetHeight() {
 		testBST = new BSTree();
@@ -68,10 +78,11 @@ public class BSTreeTests {
 		testBST.add("C");
 		testBST.add("F");
 		assertEquals(4, testBST.getHeight());
-		
-		//Maybe add a few more test to this maybe
 	}
 	
+	/**
+	 * Test method for the getSize method for the BSTree class
+	 */
 	@Test
 	public void testGetSize() {
 		testBST = new BSTree();
@@ -85,6 +96,9 @@ public class BSTreeTests {
 		assertEquals(3, testBST.size());		
 	}
 	
+	/**
+	 * Test method for the isEmpty method for the BSTree class
+	 */
 	@Test
 	public void testIsEmpty() {
 		testBST = new BSTree();
@@ -96,6 +110,9 @@ public class BSTreeTests {
 		
 	}
 	
+	/**
+	 * Test method for the clear method for the BSTree class
+	 */
 	@Test
 	public void testClear() {
 		testBST = new BSTree();
@@ -112,6 +129,9 @@ public class BSTreeTests {
 		
 	}
 	
+	/**
+	 * Test method for the contails method for the BSTree class
+	 */
 	@Test
 	public void testContains() throws TreeException {
 		testBST = new BSTree();
@@ -127,6 +147,9 @@ public class BSTreeTests {
 		assertFalse(testBST.contains("B"));
 	}
 	
+	/**
+	 * Test method for the search method for the BSTree class
+	 */
 	@Test
 	public void testSearch() throws TreeException {
 		testBST = new BSTree();
@@ -144,6 +167,9 @@ public class BSTreeTests {
 		assertEquals(null, testBST.search("P"));
 	}
 	
+	/**
+	 * Test method for the add method for the BSTree class
+	 */
 	@Test
 	public void testAdd() throws TreeException {
 		testBST = new BSTree();
@@ -178,6 +204,9 @@ public class BSTreeTests {
 
 	}
 	
+	/**
+	 * Test method for the inorderIterator method 
+	 */
 	@Test
 	public void testInorderIterator() {
 		testBST = new BSTree();
@@ -200,6 +229,9 @@ public class BSTreeTests {
 		
 	}
 
+	/**
+	 * Test method for the preorderIterator method 
+	 */
 	@Test
 	public void testPreorderIterator() {
 		testBST = new BSTree();
@@ -220,6 +252,9 @@ public class BSTreeTests {
 		
 	}
 	
+	/**
+	 * Test method for the postorderIterator method 
+	 */
 	@Test
 	public void testPostorderIterator() {
 		testBST = new BSTree();
