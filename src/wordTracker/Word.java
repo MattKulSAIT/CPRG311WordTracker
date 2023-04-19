@@ -2,6 +2,11 @@ package wordTracker;
 
 import java.util.ArrayList;
 
+/**
+ * Class to make a Word object that hold a word, and the ocurrences of it 
+ * @author Alex, Matthew, Quintin, Miguel
+ *
+ */
 public class Word implements Comparable<Word> {
 
 	private String word;
@@ -29,14 +34,30 @@ public class Word implements Comparable<Word> {
 		whereItShowedUp.add(o);
 	}
 	
+	/**
+	 * compareTo method to compare to Word object using the word field 
+	 */
 	@Override
 	public int compareTo(Word theWord) {
 		return this.word.compareTo(theWord.word);
 	}
 	
+	/**
+	 * Geter method for the word feild in a Word object 
+	 * @return the word stored in the Word object 
+	 */
 	public String getWord() {
 		return this.word;
 	}
+
+	/**
+	 * Method to get the ArrayList the holds all the times the word was read in the files
+	 * @return the whereItShowedUp
+	 */
+	public ArrayList<Occurrence> getWhereItShowedUp() {
+		return whereItShowedUp;
+	}
+	
 }
 
 

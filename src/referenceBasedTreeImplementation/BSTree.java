@@ -46,7 +46,6 @@ public class BSTree implements BSTreeADT, Serializable{
 	 * @return rootNode the root node of the tree
 	 * @throws TreeException if the size of the tree is 0
 	 */
-	@Override
 	public BSTreeNode getRoot() throws TreeException {
 			if(rootNode == null) {
 				throw new TreeException("This tree is Empty");
@@ -174,7 +173,6 @@ public class BSTree implements BSTreeADT, Serializable{
 	 * @return BSTreeNode object holdind the value that matches entry
 	 * @throws TreeException if the tree is empty.
 	 */
-	@Override
 	public BSTreeNode search(Comparable entry) throws TreeException {
 		if(size == 0) {
 			throw new TreeException("This tree is Empty");

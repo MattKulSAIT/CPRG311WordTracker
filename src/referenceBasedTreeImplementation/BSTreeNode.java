@@ -1,18 +1,29 @@
 package referenceBasedTreeImplementation;
 
-public class BSTreeNode <E> {
+/**
+ * Class that represents a Node on a Binary Search Tree
+ * 
+ * @author Alex, Matthew, Quintin, Miguel
+ *
+ * @param <E> Allowing for Binary Trees to be of any Type
+ */
+public class BSTreeNode<E> {
 
 	private Comparable holding = null;
 	private BSTreeNode parentNode = null;
 	private BSTreeNode leftSubNode = null;
 	private BSTreeNode rightSubNode = null;
 	
-	
+	/**
+	 * Constructor for a BSTreeNode
+	 * @param holding Comparable object to be stored in the node 
+	 */
 	public BSTreeNode(Comparable holding) {
 		this.holding = holding;
 	}
 
 	/**
+	 * Method to get the comparable object being held in the node 
 	 * @return what is being held in this node
 	 */
 	public Object getHolding() {
@@ -20,6 +31,7 @@ public class BSTreeNode <E> {
 	}
 
 	/**
+	 * Method to set what comparable object is being sored in the node 
 	 * @param holding the value that will be stored in the node
 	 */
 	public void setHolding(Comparable holding) {
@@ -27,6 +39,7 @@ public class BSTreeNode <E> {
 	}
 	
 	/**
+	 * Method to get the parentNode of a node
 	 * @return the parentNode
 	 */
 	public BSTreeNode getParentNode() {
@@ -35,6 +48,7 @@ public class BSTreeNode <E> {
 
 
 	/**
+	 *  Method to set the parentNode for a Node
 	 * @param parentNode the parentNode to set
 	 */
 	public void setParentNode(BSTreeNode parentNode) {
@@ -42,6 +56,7 @@ public class BSTreeNode <E> {
 	}
 
 	/**
+	 * Method to get the leftSubNode of a node
 	 * @return the leftSubNode
 	 */
 	public BSTreeNode getLeftSubNode() {
@@ -49,6 +64,7 @@ public class BSTreeNode <E> {
 	}
 
 	/**
+	 * Method to set the leftSubNode for a Node
 	 * @param leftSubNode the leftSubNode to set
 	 */
 	public void setLeftSubNode(BSTreeNode leftSubNode) {
@@ -56,6 +72,7 @@ public class BSTreeNode <E> {
 	}
 
 	/**
+	 * Method to get the rightSubNode of a node
 	 * @return the rightSubNode
 	 */
 	public BSTreeNode getRightSubNode() {
@@ -63,6 +80,7 @@ public class BSTreeNode <E> {
 	}
 
 	/**
+	 * Method to set the rightSubNode for a Node
 	 * @param rightSubNode the rightSubNode to set
 	 */
 	public void setRightSubNode(BSTreeNode rightSubNode) {
