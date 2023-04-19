@@ -1,5 +1,7 @@
 package referenceBasedTreeImplementation;
 
+import java.io.Serializable;
+
 /**
  * Class that represents a Node on a Binary Search Tree
  * 
@@ -7,8 +9,12 @@ package referenceBasedTreeImplementation;
  *
  * @param <E> Allowing for Binary Trees to be of any Type
  */
-public class BSTreeNode<E> {
+public class BSTreeNode<E> implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4L;
 	private Comparable holding = null;
 	private BSTreeNode parentNode = null;
 	private BSTreeNode leftSubNode = null;

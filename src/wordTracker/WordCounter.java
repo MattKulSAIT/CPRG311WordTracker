@@ -1,7 +1,12 @@
 package wordTracker;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,21 +30,23 @@ public class WordCounter {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//Storing and Serializatino to do at a latter date 
+		//Alter the code is ignore if the thing = "" becuase its catching empty spaces
 		
 		Scanner scanner = null;
 		File file = null;
-		String fileName ="res/MattTest.txt";
-		BSTree BST = new BSTree();
+		String fileName ="res/textfile.txt";
+		BSTree BST = getExistingTree();
 		
 		try {
-			file = new File("res/MattTest.txt");
+			file = new File("res/textfile.txt");
 			scanner = new Scanner(file);
 			int lineNumber = 1;
 
 			while(scanner.hasNext()) {
 				String aLine = scanner.nextLine();
 			
-				String [] listOfLine = aLine.split("\\s+");
+				//Need to inclued the sybmoles too
+				String [] listOfLine = aLine.split("[\\s\\p{Punct}]+");
 				
 				for(String word: listOfLine) {
 					
@@ -72,8 +79,10 @@ public class WordCounter {
 		
 		//System.out.println("Stuff");
 		Iterator i = BST.inorderIterator();
+		pfPrint(i);
 		
-		poPrint(i);
+		Iterator iToBeSerilaized = BST.preorderIterator();
+		serializeTree(iToBeSerilaized);
 	}
 
 	/**
@@ -82,10 +91,44 @@ public class WordCounter {
 	 * if not a new empty one will be provided 
 	 * @return
 	 */
-	private BSTree getExistingTree() {
+	private static BSTree getExistingTree() {
+		File file = new File("res/repository.ser");
 		
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+			Iterator i = (Iterator) ois.readObject();
+			BSTree BST = new BSTree();
+			while(i.hasNext()) {
+				BST.add((Word)i.next().getHolding());
+			}
+			return BST;
+		}
+		catch(FileNotFoundException e) {
+			//The tree dose not exist so a new one is returned
+			return new BSTree();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
+	
+	/**
+	 * Serialize The contents of the binary tree to res/repository.ser
+	 * @param i an iterator of the binary tree in order to be serialized  
+	 */
+	private static void serializeTree(Iterator i) {
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("res/repository.ser"));
+			 out.writeObject(i);
+			 out.close();
+		}
+		catch (IOException e) {
+		    e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Private method to print the list in alphabetical order with the files they came from 
 	 * @param i an iterator of the binary tree in alphabetic order 
@@ -124,7 +167,7 @@ public class WordCounter {
 	 * @param i an iterator of the binary tree in alphabetic order 
 	 */
 	private static void poPrint(Iterator i) {
-		while(i.hasNext()){
+		while(i.hasNext()){;
 			Word currentWord = ((Word) i.next().getHolding());
 			System.out.print(currentWord.getWord() + " --> ");
 			ArrayList<Occurrence> showedUp = currentWord.getWhereItShowedUp();

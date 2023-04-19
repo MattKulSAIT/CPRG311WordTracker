@@ -1,5 +1,6 @@
 package wordTracker;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,8 +8,12 @@ import java.util.ArrayList;
  * @author Alex, Matthew, Quintin, Miguel
  *
  */
-public class Word implements Comparable<Word> {
+public class Word implements Comparable<Word>, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2L;
 	private String word;
 	private ArrayList<Occurrence> whereItShowedUp = new ArrayList();
 	

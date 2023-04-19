@@ -1,6 +1,12 @@
 package wordTracker;
 
-public class Occurrence {
+import java.io.Serializable;
+
+public class Occurrence implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String fileName;
 	private int lineNumber;
 	

@@ -376,8 +376,12 @@ public class BSTree implements BSTreeADT, Serializable{
 	 * @author Matthew, Alex, Quintin, Miguel 
 	 *
 	 */
-	public class Iterator implements utilities.Iterator{
+	public class Iterator implements utilities.Iterator, Serializable{
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 3L;
 		ArrayList<BSTreeNode> theArray = new ArrayList();
 		int cursor;
 		
